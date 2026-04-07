@@ -1,4 +1,4 @@
-🦈 Changes & Technical Implementation (Veteran Trader)
+🦈 Changes & Technical Implementation (EKLAVYA)
 Task 1: Cryptographic Wallet System
 ECDSA Integration: Replaced plain-string addresses with real secp256k1 elliptic curve cryptography using the Node.js crypto module.
 Wallet Generation: Added POST /api/wallets to generate hex-encoded SPKI public keys (addresses) and SEC1 private keys.
