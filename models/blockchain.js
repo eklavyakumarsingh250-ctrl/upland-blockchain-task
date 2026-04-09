@@ -147,3 +147,16 @@ class Blockchain {
 }
 
 module.exports = { Blockchain, Block, Transaction };
+class Property {
+  /**
+   * Defines a Metaverse Land Parcel.
+   */
+  constructor(id, coordinates, price, owner) {
+    this.id = id;               // e.g., "PARCEL-77"
+    this.coordinates = coordinates; // e.g., { lat: 25.5941, lng: 85.1376 } (Patna, Bihar)
+    this.price = price;         // Initial mint price
+    this.owner = owner;         // Public Key of the owner
+    this.isForSale = true;
+  }
+}
+
