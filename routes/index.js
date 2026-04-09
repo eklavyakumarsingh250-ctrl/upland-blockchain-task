@@ -16,3 +16,8 @@ router.use('/stats', statsRoutes);
 router.use('/wallets', walletRoutes); // Task 1: Mapping /api/wallets
 
 module.exports = router;
+const propertyRoutes = require('./property.routes');
+
+// Add this line
+router.use('/properties', propertyRoutes);
+
