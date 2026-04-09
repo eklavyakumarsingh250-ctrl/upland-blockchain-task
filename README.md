@@ -21,3 +21,60 @@ graph TD
     C -->|Failure| E[Revert Trade]
     D --> F[(Persistence Layer: JSON)]
     F --> G[Global Property Map]
+---
+
+## 🏗️ Technical Architecture & Ecosystem
+
+### 1️⃣ The "Liquidity Flow" (Sequence Diagram)
+*This diagram illustrates how a Land Deed is signed and settled on the Bihar Genesis Map.*
+
+```mermaid
+sequenceDiagram
+    participant B as Buyer (Eklavya)
+    participant A as API Server
+    participant L as Ledger (JSON)
+    
+    Note over B: Signs Deed with Private Key
+    B->>A: POST /api/properties/buy
+    A->>A: Validate ECDSA Signature (secp256k1)
+    alt Valid Signature
+        A->>L: Update Property Owner
+        L-->>A: Persistence Confirmed
+        A-->>B: 200 OK (Property Owned)
+    else Invalid Signature
+        A-->>B: 403 Forbidden (Retail Trap Detected)
+    end
+erDiagram
+    BLOCKCHAIN ||--o{ PROPERTY : "mints"
+    BLOCKCHAIN ||--o{ TRANSACTION : "records"
+    PROPERTY {
+        string id
+        float lat
+        float lng
+        string owner
+    }
+    TRANSACTION {
+        string from
+        string to
+        float amount
+        string signature
+    }
+stateDiagram-v2
+    [*] --> Minted: Genesis Block Created
+    Minted --> ForSale: Listed on Bihar Map
+    ForSale --> Sold: Buyer Signs Transaction
+    Sold --> Locked: Cooldown Period
+    Locked --> ForSale: Re-listed by Owner
+      ____
+     /    \      ( Please give a )
+    | ^  ^ |    /    STAR! ★    )
+    |  __  |   / ______________/
+    \  --  /  /
+     |    |--'
+    /      \
+   /        \
+  |          |
+  \__________/
+     |    |
+    _|    |_
+   (________)  <- Your Resident Code-Goblin
