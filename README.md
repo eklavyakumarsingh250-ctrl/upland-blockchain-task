@@ -11,3 +11,13 @@ Robust Loading: Implemented a fail-safe boot sequence in models/index.js that va
 Known Limitations & Trade-offs
 In-Memory Buffer: While the chain is persisted to JSON, it is still held in memory for speed. For a "Global-Scale" system, I would migrate this to a dedicated LevelDB or PostgreSQL instance.
 Local State: Private keys are lost on page refresh. In a production build, I would integrate a browser-based encrypted vault or "MetaMask" style provider.
+## 📊 Metaverse Engine Architecture (V1)
+
+```mermaid
+graph TD
+    A[Client Wallet] -->|Sign Deed| B(API Gateway)
+    B --> C{Validation}
+    C -->|Success| D[Property Transfer]
+    C -->|Failure| E[Revert Trade]
+    D --> F[(Persistence Layer: JSON)]
+    F --> G[Global Property Map]
